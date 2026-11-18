@@ -1,1 +1,12 @@
 node server.js --service-account ./secrets/service-account.json --port 8081
+
+curl --location 'http://localhost:8081/v2/entries:list' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "resourceNames": [
+        "projects/gcp-pttep-th-it-apimgmt-dev"
+    ],
+    "pageSize": 10,
+    "filter": "jsonPayload.@type=\"type.googleapis.com/google.cloud.loadbalancing.type.LoadBalancerLogEntry\"",
+    "orderBy": "timestamp desc"
+}'
